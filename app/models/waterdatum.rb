@@ -1,0 +1,2 @@
+class Waterdatum < ApplicationRecord
+end

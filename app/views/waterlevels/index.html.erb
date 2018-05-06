@@ -1,0 +1,41 @@
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['gauge']});
+    google.charts.setOnLoadCallback(drawGauge);
+
+    var gaugeOptions = {min: 0, max: 100, yellowFrom: 70, yellowTo: 80,
+        redFrom: 80, redTo: 100, minorTicks: 5};
+    var gauge;
+
+    function drawGauge() {
+        gaugeData = new google.visualization.DataTable();
+        gaugeData.addColumn('number', 'Water Level');
+        gaugeData.addRows(1);
+        gaugeData.setCell(0, 0, <%=@waterLevel %>);
+
+        gauge = new google.visualization.Gauge(document.getElementById('gauge_div'));
+        gauge.draw(gaugeData, gaugeOptions);
+    }
+
+    function changeTemp() {
+        $.ajax({
+            url: "http://localhost:3000/waterlevels/index?format=json",
+        })
+            .done(function( data ) {
+                gaugeData.setValue(0, 0, parseInt(data.level));
+                gauge.draw(gaugeData, gaugeOptions);
+            });
+
+    }
+
+    window.setInterval(changeTemp, 1000);
+</script>
+
+<div class="container">
+  <h2>Water Level</h2>
+</div>
+<div style="padding: 1%;" class="col-md-12">
+  <div class="panel-body">
+    <div id="gauge_div" style="width: 800px; height: 240px; position: absolute; left: 350px; top: 100px;"></div>
+  </div>
+</div>

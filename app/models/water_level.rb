@@ -1,0 +1,2 @@
+class WaterLevel < ApplicationRecord
+end

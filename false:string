@@ -1,0 +1,3 @@
+      invoke  active_record
+      remove    db/migrate/20180425011025_add_name_to_users.rb
+      create    db/migrate/20180425011307_add_name_to_users.rb

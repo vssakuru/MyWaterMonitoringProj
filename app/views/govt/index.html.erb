@@ -1,0 +1,45 @@
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+animationEnabled: true,
+zoomEnabled: true,
+title:{
+text: "Pollution Level in Montrose"
+},
+axisY :{
+includeZero:false
+},
+data: data  // random generator below
+});
+chart.render();
+
+}
+
+var limit = 10;
+
+var y = 5;
+var data = [];
+var dataSeries = { type: "line" };
+var dataPoints = [];
+for (var i = 0; i < limit; i += 1) {
+y += (Math.random() * 10 - 5);
+dataPoints.push({
+x: i,
+y: y
+});
+}
+dataSeries.dataPoints = dataPoints;
+data.push(dataSeries);
+
+</script>
+<div class="container">
+  <h2>Government</h2>
+  <button class="btn" onclick="location.href='http://localhost:3000/waterlevels/index'">Water Level</button>
+</div>
+
+<div style="padding: 1%;" class="col-md-12">
+  <div class="panel-body">
+    <div id="chartContainer" style="height: 300px; width: 100%;"><script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script></div>
+  </div>
+</div>

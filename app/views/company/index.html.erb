@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Composition of Minerals in Montrose"
+            },
+            subtitles: [{
+                text: "Data for 2018",
+                fontSize: 16
+            }],
+            data: [{
+                type: "pie",
+                indexLabelFontSize: 18,
+                radius: 80,
+                indexLabel: "{label} - {y}",
+                yValueFormatString: "###0.0\"%\"",
+                click: explodePie,
+                dataPoints: [
+
+                    { y: 42, label: "Sulphate" },
+                    { y: 21, label: "Potassium"},
+                    { y: 24.5, label: "Antimony" },
+                    { y: 9, label: "Calcium" },
+                    { y: 3.1, label: "Lead" }
+                ]
+            }]
+        });
+        chart.render();
+
+        function explodePie(e) {
+            for(var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+                if(i !== e.dataPointIndex)
+                    e.dataSeries.dataPoints[i].exploded = false;
+            }
+        }
+
+    }
+</script>
+
+
+<div class="container">
+  <h2>Pharmacy Company</h2>
+  <button class="btn" onclick="location.href='http://localhost:3000/waterlevels/index'">Water Level</button>
+</div>
+
+<div style="padding: 1%" class="col-md-12">
+  <div class="panel-body">
+    <div id="chartContainer" style="height: 370px; width: 100%;"><script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script></div>
+  </div>
+</div>
